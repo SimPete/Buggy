@@ -5,4 +5,4 @@ Deux moteurs, controls par keyboard.
 
 Développements futurs: 
   Caméra IR
-  Rotation de la camér
+  Rotation de la caméra
