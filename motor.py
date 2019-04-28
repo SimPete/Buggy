@@ -63,7 +63,7 @@ def Handbrakes():
 	GPIO.output(16, GPIO.HIGH)
 
 def MotorA_PWM(MotorA_DutyCycle):
-	if MotorA_PWM_Activation = 0:
+	if MotorA_PWM_Activation == 0:
 		print "Activating PWM on motor A..."
 		MotorA_PWM = GPIO.PWM(7, 50) 		#Start PWM on Pin 7 with a frequency of 50Hz 
 		MotorA_PWM.start(MotorA_DutyCycle)  # start the PWM on 50 percent duty cycle  
@@ -80,7 +80,7 @@ def MotorA_PWM(MotorA_DutyCycle):
 
 	
 def MotorB_PWM(MotorB_DutyCycle):
-	if MotorB_PWM_Activation = 0:
+	if MotorB_PWM_Activation == 0:
 		print "Activating PWM on motor B..."
 		MotorB_PWM = GPIO.PWM(18, 50) 		#Start PWM on Pin 7 with a frequency of 50Hz 
 		MotorB_PWM.start(MotorB_DutyCycle)  # start the PWM on 50 percent duty cycle  
@@ -101,12 +101,13 @@ def cleanup():
 	print "GPIO are clean!"
 
 def main():
-#TODO MainFunction with keyboard controls, add exit criteria
+# TODO MainFunction with keyboard controls, add exit criteria
         try:
 			while True:   
 				print "We're in the game now!"
 				# Drive the motor clockwise
 				# Motor A:
+				print "Enabling motors..."
 				GPIO.output(12, GPIO.HIGH) # Set AIN1
 				GPIO.output(11, GPIO.LOW) # Set AIN2
 				# Motor B:
@@ -114,15 +115,20 @@ def main():
 				GPIO.output(16, GPIO.LOW) # Set BIN2
 			
 				# Set the motor speed
+				print "Setting motor speeds..."
 				# Motor A:
-				MotorA_PWM(25) # Set PWMA
+				MotorA_PWM = GPIO.PWM(7, 50)
+				MotorA_PWM.start(50)
 				# Motor B:
-				MotorB_PWM(25) # Set PWMB
-						
+				MotorB_PWM = GPIO.PWM(18, 50)
+				MotorB_PWM.start(50)		
+
 				# Wait 5 seconds
+				print "Keep the commands alive for 5 seconds..."
 				time.sleep(5)
 				
 				# Drive the motor counterclockwise
+				print "Reversing motors..."
 				# Motor A:
 				GPIO.output(12, GPIO.LOW) # Set AIN1
 				GPIO.output(11, GPIO.HIGH) # Set AIN2
@@ -131,12 +137,16 @@ def main():
 				GPIO.output(16, GPIO.HIGH) # Set BIN2
 				
 				# Set the motor speed
+				print "FASTER!..."
 				# Motor A:
-				MotorA_PWM(50) # Set PWMA
+				MotorA_PWM = GPIO.PWM(7, 50)
+				MotorA_PWM.start(100)
 				# Motor B:
-				MotorB_PWM(50) # Set PWMB
-			
+				MotorB_PWM = GPIO.PWM(18, 50)
+				MotorB_PWM.start(100)		
+
 				# Wait 5 seconds
+				print "Another 5 seconds of awesomness..."
 				time.sleep(5)
 
 	except KeyboardInterrupt:  
